@@ -6,7 +6,7 @@
 	"scripts": {
 	  "start": "nodemon server.js"
 	},
-	"author": "Gizem",
+	"author": "Gizem Ulubayam",
 	"license": "MIT",
 	"dependencies": {
 	  "cors": "^2.8.5",
