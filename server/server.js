@@ -44,21 +44,26 @@ const resolvers = {
           todos.splice(i, 1);
         }
       }
+      return args.id;
     },
     updateTodo: (parent, args, context, info) => {
       for (let i in todos) {
-        if (todos[i] === args.id) {
+        if (todos[i].id === args.id) {
           todos[i].completed = !todos[i].completed;
         }
       }
+      return args.id;
     }
   }
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
+
 const app = express();
 server.applyMiddleware({ app });
 
 app.use(cors());
 
-app.listen({ port: 5555 }, () => console.log("basarılı", server.graphqlPath));
+app.listen({ port: 5555 }, () =>
+  console.log("Now browse to http://localhost:5555" + server.graphqlPath)
+);

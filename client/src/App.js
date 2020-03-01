@@ -3,10 +3,47 @@ import "./App.css";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+const READ_TODOS = gql`
+  query todos {
+    todos {
+      id
+      text
+      completed
+    }
+  }
+`;
+
+const CREATE_TODO = gql`
+  mutation CreateTodo($text: String!) {
+    createTodo(text: $text)
+  }
+`;
+const REMOVE_TODO = gql`
+  mutation RemoveTodo($id: String!) {
+    removeTodo(id: $id)
+  }
+`;
+
+const UPDATE_TODO = gql`
+  mutation UpdateTodo($id: String!) {
+    updateTodo(id: $id)
+  }
+`;
+
 function App() {
+  let input;
+  const { loading, error, data } = useQuery(READ_TODOS);
+  const [createTodo] = useMutation(CREATE_TODO);
+  const [deleteTodo] = useMutation(REMOVE_TODO);
+  const [updateTodo] = useMutation(UPDATE_TODO);
+
+  if (loading) return <p>loading</p>;
+  if (error) return <p>Opps!!</p>;
+  if (!data) return <p>Not Found</p>;
+
   return (
     <div className="app">
-      {/* <h3>Create New Todo</h3>
+      <h3>Create New Todo</h3>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -59,7 +96,7 @@ function App() {
             </button>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 }
