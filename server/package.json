@@ -4,12 +4,12 @@
 	"description": "",
 	"main": "server.js",
 	"scripts": {
-	  "start": "nodemon server.js"
+		"start": "nodemon server.js"
 	},
 	"author": "Gizem Ulubayam",
 	"license": "MIT",
 	"dependencies": {
-	  "cors": "^2.8.5",
-	  "nodemon": "^2.0.2"
+		"cors": "^2.8.5",
+		"nodemon": "^2.0.2"
 	}
-  }
+}
