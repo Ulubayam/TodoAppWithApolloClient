@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { gql } from "apollo-boost";
 
 const READ_TODOS = gql`
   query todos {
@@ -45,7 +45,7 @@ function App() {
     <div className="app">
       <h3>Create New Todo</h3>
       <form
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           createTodo({ variables: { text: input.value } });
           input.value = "";
@@ -56,7 +56,7 @@ function App() {
           className="form-control"
           type="text"
           placeholder="Enter todo"
-          ref={node => {
+          ref={(node) => {
             input = node;
           }}
         ></input>
@@ -65,7 +65,7 @@ function App() {
         </button>
       </form>
       <ul>
-        {data.todos.map(todo => (
+        {data.todos.map((todo) => (
           <li key={todo.id} className="w-100">
             <span className={todo.completed ? "done" : "pending"}>
               {todo.text}
