@@ -1,13 +1,15 @@
 const express = require("express");
+const path = require("path");
 var cors = require("cors");
+
 const { ApolloServer, gql } = require("apollo-server-express");
-if (process.env.NODE_ENV) {
-  app.use(express.static("client/build"));
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+const app = express();
+app.use(express.static("../client/build"));
+app.get("*", (req, res) => {
+  console.log("res", res);
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
+
 let todos = [
   {
     id: Date.now().toString(),
@@ -62,14 +64,11 @@ const resolvers = {
     },
   },
 };
-
 const server = new ApolloServer({ typeDefs, resolvers });
 
-const app = express();
 server.applyMiddleware({ app });
-
 app.use(cors());
 
 app.listen({ port: 5555 }, () =>
-  console.log("Now browse to http://localhost:5555" + server.graphqlPath)
+  console.log("Now browse to http://localhost:5555")
 );
