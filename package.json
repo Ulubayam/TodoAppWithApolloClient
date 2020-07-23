@@ -9,6 +9,8 @@
     "node": "10.15.3"
   },
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "build": "webpack",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   }
 }

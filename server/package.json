@@ -4,8 +4,7 @@
 	"description": "",
 	"main": "server.js",
 	"scripts": {
-		"start": "nodemon server.js",
-		"heroku-postbuild": "cd client && npm install && npm run build"
+		"start": "nodemon server.js"
 	},
 	"author": "Gizem Ulubayam",
 	"license": "MIT",

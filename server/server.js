@@ -1,14 +1,8 @@
 const express = require("express");
 const path = require("path");
 var cors = require("cors");
-
 const { ApolloServer, gql } = require("apollo-server-express");
 const app = express();
-app.use(express.static("../client/build"));
-app.get("*", (req, res) => {
-  console.log("res", res);
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
 
 let todos = [
   {
@@ -67,6 +61,11 @@ const resolvers = {
 const server = new ApolloServer({ typeDefs, resolvers });
 
 server.applyMiddleware({ app });
+app.use(express.static("../client/build"));
+app.get("../client/build", (req, res) => {
+  console.log("res", res);
+  res.sendFile({ port: 5555 }, "../client/build");
+});
 app.use(cors());
 
 app.listen({ port: 5555 }, () =>
