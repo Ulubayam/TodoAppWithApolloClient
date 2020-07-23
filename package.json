@@ -1,0 +1,14 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Ulubayam/TodoAppWithApolloClient.git",
+  "author": "gizem.ulubayam <gizem.ulubayam@cimri.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "10.15.3"
+  },
+  "scripts": {
+    "start": "node server/server.js"
+  }
+}

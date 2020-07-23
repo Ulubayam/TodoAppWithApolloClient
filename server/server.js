@@ -1,4 +1,5 @@
 const express = require("express");
+var cors = require("cors");
 const { ApolloServer, gql } = require("apollo-server-express");
 if (process.env.NODE_ENV) {
   app.use(express.static("client/build"));
