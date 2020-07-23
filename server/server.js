@@ -1,13 +1,15 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 const cors = require("cors");
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 let todos = [
   {
     id: Date.now().toString(),
     text: "Hello from GraphQL",
-    completed: true
-  }
+    completed: true,
+  },
 ];
 
 const typeDefs = gql`
@@ -28,14 +30,14 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    todos: () => todos
+    todos: () => todos,
   },
   Mutation: {
     createTodo: (parent, args, context, info) => {
       return todos.push({
         id: Date.now().toString(),
         text: args.text,
-        completed: false
+        completed: false,
       });
     },
     removeTodo: (parent, args, context, info) => {
@@ -53,8 +55,8 @@ const resolvers = {
         }
       }
       return args.id;
-    }
-  }
+    },
+  },
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
